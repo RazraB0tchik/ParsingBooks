@@ -20,7 +20,7 @@ public class DatabaseTools {
         else return true;
     }
 
-    @Async
+//    @Async
     public void saveBookInDataBase(Book book){
        if (checkBookInDatabase(book.getBookName())){
            bookRepository.save(book);
