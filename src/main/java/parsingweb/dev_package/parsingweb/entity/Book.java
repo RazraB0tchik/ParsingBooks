@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -15,8 +16,8 @@ import java.util.Date;
 public class Book {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @Column(name = "book_name")
     String bookName;
@@ -31,10 +32,10 @@ public class Book {
     Integer yearStart;
 
     @Column(name = "imageBook")
-    Long imageBook;
+    String imageBook;
 
     @Column(name = "book_isbn")
-    BigInteger bookISBN;
+    String bookISBN;
 
     @Column(name = "count_pages")
     Integer countPages;
@@ -47,6 +48,22 @@ public class Book {
     String site;
 
     @Column(name = "date_update")
-    Date updateTime;
+    LocalDate updateTime;
 
+
+    public Book(String bookName, String author, String description, Integer yearStart, String imageBook, String bookISBN, Integer countPages, String genre, String site, LocalDate updateTime) {
+        this.bookName = bookName;
+        this.author = author;
+        this.description = description;
+        this.yearStart = yearStart;
+        this.imageBook = imageBook;
+        this.bookISBN = bookISBN;
+        this.countPages = countPages;
+        this.genre = genre;
+        this.site = site;
+        this.updateTime = updateTime;
+    }
+
+    public Book() {
+    }
 }
