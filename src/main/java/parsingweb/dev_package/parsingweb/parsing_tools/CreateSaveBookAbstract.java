@@ -1,17 +1,18 @@
-package parsingweb.dev_package.parsingweb.services;
+package parsingweb.dev_package.parsingweb.parsing_tools;
 
+import lombok.Data;
+import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import parsingweb.dev_package.parsingweb.entity.Book;
 import parsingweb.dev_package.parsingweb.repositories.BookRepository;
 
-@Service
-public class DatabaseTools {
+@Data
+public abstract class CreateSaveBookAbstract {
 
     @Autowired
     BookRepository bookRepository;
+
+    protected Book book;
 
     public boolean checkBookInDatabase(String name){
         if (bookRepository.findBookByBookName(name)!=null){
@@ -20,11 +21,10 @@ public class DatabaseTools {
         else return true;
     }
 
-    @Async
+    @Synchronized
     public void saveBookInDataBase(Book book){
-       if (checkBookInDatabase(book.getBookName())){
-           bookRepository.save(book);
-       }
+        if (checkBookInDatabase(book.getBookName())){
+            bookRepository.save(book);
+        }
     }
-
 }
