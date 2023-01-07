@@ -28,10 +28,11 @@ public class ParsingChitayGorod extends ParsingAbtractClass {
 
         try {
             Document bookPage = Jsoup.connect(urlSite+"/catalog/books") //переход на главную страницу книг
-                    .userAgent("Chrome/4.0.249.0 Safari/532.5")
-                    .referrer("http://www.google.com")
+//                    .userAgent("Chrome/4.0.249.0 Safari/532.5")
+//                    .referrer("http://www.google.com")
                     .get();
             var info = bookPage.getElementsByClass("pt4");
+            System.out.println("sout@@@@!");
             info.forEach(element -> {
                 linksToBookGenres.add(urlSite + element.child(2).attr("href"));
             });
@@ -51,9 +52,37 @@ public class ParsingChitayGorod extends ParsingAbtractClass {
 //
 
 //                System.out.println(g);
-                parsingBookCards.parsingAllPages(urlSite, genreLink);
-//                        defUrlPage = genreLink + "?page=";
 
+                defUrlPage = genreLink + "?page=";
+
+                try {
+                    int page = 1;
+                    boolean stopPars = false;
+//                            for (page=1; page <= Integer.parseInt(lastPageElement.select("li").text()); page++) {
+//                                System.out.println(pageOnGenres.text());
+
+                    while (!stopPars) {
+                        Document booksOnPage = Jsoup.connect(defUrlPage + page) //генерируем ссылку для каждого жанра на страницу
+//                                .userAgent("Chrome/4.0.249.0 Safari/532.5")
+//                                .referrer("http://www.google.com")
+                                .get();
+                        var pageOnGenres = booksOnPage.select(".pagination.text-center").get(0).getElementsByClass("current");
+                        if (Integer.parseInt(pageOnGenres.text()) != page) {
+                            stopPars = true;
+                        }
+                        var allBooksOnPage = booksOnPage.getElementsByClass("product-card");
+                        allBooksOnPage.forEach(elem -> {
+
+                            parsingBookCards.parsingAllPages(urlSite, genreLink, elem.attr("data-chg-id"));
+
+                        });
+                        page++;
+
+                    }
+                }
+                catch (Exception e){
+                    throw new RuntimeException(e);
+                    }
 
 
             });
