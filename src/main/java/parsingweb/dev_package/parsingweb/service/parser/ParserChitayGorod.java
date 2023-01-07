@@ -1,23 +1,23 @@
-package parsingweb.dev_package.parsingweb.elements_for_parsing;
+package parsingweb.dev_package.parsingweb.service.parser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import parsingweb.dev_package.parsingweb.parsing_tools.ParsingInterface;
+import org.springframework.stereotype.Service;
+import parsingweb.dev_package.parsingweb.tools.ParsingInterface;
 
 import java.util.ArrayList;
 
-@Component
-public class ParsingChitayGorod implements ParsingInterface {
+@Service
+public class ParserChitayGorod implements ParsingInterface {
 
-    String urlSite = "https://m.chitai-gorod.ru";
-    ArrayList<String> linksToBookGenres = new ArrayList<>();
-    String defUrlPage;
+    private final String urlSite = "https://m.chitai-gorod.ru";
+    private final ArrayList<String> linksToBookGenres = new ArrayList<>();
+    private String defUrlPage;
 
 
     @Autowired
-    ParsingBookCards parsingBookCards;
+    ParserBookCards parserBookCards;
     @Override
     public void parsingSite() {
 
@@ -44,7 +44,7 @@ public class ParsingChitayGorod implements ParsingInterface {
                         var allBooksOnPage = booksOnPage.getElementsByClass("product-card");
                         allBooksOnPage.forEach(elem -> {
 
-                            parsingBookCards.parsingAllPages(urlSite, genreLink, elem.attr("data-chg-id"));
+                            parserBookCards.parsingAllPages(urlSite, genreLink, elem.attr("data-chg-id"));
 
                         });
                         page++;
