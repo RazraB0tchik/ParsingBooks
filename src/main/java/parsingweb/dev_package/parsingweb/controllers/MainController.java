@@ -1,14 +1,9 @@
 package parsingweb.dev_package.parsingweb.controllers;
 
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import parsingweb.dev_package.parsingweb.dto.AuthorModDTO;
-import parsingweb.dev_package.parsingweb.dto.GenreModDTO;
-import parsingweb.dev_package.parsingweb.dto.NameModDto;
-import parsingweb.dev_package.parsingweb.elements_for_parsing.ParsingChitayGorod;
 import parsingweb.dev_package.parsingweb.repositories.BookRepository;
 
 
@@ -23,20 +18,18 @@ public class MainController {
     public ResponseEntity<?> getBooksAll() {
         return ResponseEntity.ok(bookRepository.findAll());
     }
-    @PostMapping(value = "/nameBook")
-    public ResponseEntity<?> getBooksByName(@RequestBody NameModDto nameModDto){
-        System.out.println(nameModDto.getName());
-        return ResponseEntity.ok(bookRepository.findBookByBookName(nameModDto.getName()));
+    @GetMapping("/bookName")
+    public ResponseEntity<?> getBooksByName(@RequestParam String nameBook){
+        return ResponseEntity.ok(bookRepository.findBookByBookName(nameBook));
     }
 
-    @PostMapping(value = "/author")
-    public ResponseEntity<?> getBooksByAuthor(@RequestBody AuthorModDTO authorModDTO){
-        System.out.println(authorModDTO.getAuthor());
-        return ResponseEntity.ok(bookRepository.findAllByAuthor(authorModDTO.getAuthor()));
+    @GetMapping("/authorName")
+    public ResponseEntity<?> getBooksByAuthor(@RequestParam String authorName){
+        return ResponseEntity.ok(bookRepository.findAllByAuthor(authorName));
     }
 
-    @PostMapping(value = "/genre")
-    public ResponseEntity<?> getBooksByGenre(@RequestBody GenreModDTO genreModDTO){
-        return ResponseEntity.ok(bookRepository.findBookByGenre(genreModDTO.getGenre()));
+    @GetMapping("/genre")
+    public ResponseEntity<?> getBooksByGenre(@RequestParam String genreBook){
+        return ResponseEntity.ok(bookRepository.findBookByGenre(genreBook));
     }
 }

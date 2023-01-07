@@ -5,17 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import parsingweb.dev_package.parsingweb.elements_for_parsing.ParsingChitayGorod;
+import parsingweb.dev_package.parsingweb.service.parser.ParserChitayGorod;
 
 @RestController
-@RequestMapping(value = "/parsing")
-public class ActivateParsingController {
+@RequestMapping(value = "/parser")
+public class ActivateParserController {
 
     @Autowired
-    ParsingChitayGorod parsingChitayGorod;
+    ParserChitayGorod parserChitayGorod;
 
     @GetMapping(value = "/start")
     public void startParsing(){
-        parsingChitayGorod.parsingSite();
+        parserChitayGorod.parsingSite();
     }
 }

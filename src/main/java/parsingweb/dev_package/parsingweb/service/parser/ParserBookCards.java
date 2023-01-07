@@ -1,18 +1,17 @@
-package parsingweb.dev_package.parsingweb.elements_for_parsing;
+package parsingweb.dev_package.parsingweb.service.parser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import parsingweb.dev_package.parsingweb.entity.Book;
-import parsingweb.dev_package.parsingweb.parsing_tools.CreateSaveBookAbstract;
+import parsingweb.dev_package.parsingweb.tools.CreateSaveBookAbstract;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Component
-public class ParsingBookCards extends CreateSaveBookAbstract {
+public class ParserBookCards extends CreateSaveBookAbstract {
 
     private Integer checkСharacteristic(String element) {
         if (Objects.equals(element, "")) {

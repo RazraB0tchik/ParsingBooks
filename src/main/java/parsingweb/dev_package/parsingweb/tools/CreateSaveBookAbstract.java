@@ -1,4 +1,4 @@
-package parsingweb.dev_package.parsingweb.parsing_tools;
+package parsingweb.dev_package.parsingweb.tools;
 
 import lombok.Data;
 import lombok.Synchronized;
